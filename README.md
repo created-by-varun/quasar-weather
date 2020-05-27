@@ -1,5 +1,6 @@
-# WeatherApp-Quasar (weather-quasar)
-
+# WeatherApp-Quasar  
+Hosted live at: https://weatherapp-quasar.netlify.app/#/  
+  
 A crossplatform weather application made with quasar framework using VueJS
 
 ## Install the dependencies
