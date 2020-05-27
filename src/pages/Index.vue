@@ -35,15 +35,15 @@
 				{{ weatherData.weather[0].main }}
 			</div>
 			<div class="text-h1 text-weight-thin q-my-lg relative-position">
-				<span>8</span>
-				<span class="text-h4 relative-position degree">&deg;</span>
+				<span>{{ Math.round(weatherData.main.temp) }}</span>
+				<span class="text-h4 relative-position degree">&deg;C</span>
 			</div>
 			
 		</div> 
 		
 		
 		<div class="col text-center">
-			<img src="" alt="weather-icon" />
+			<img :src="`http://openweathermap.org/img/wn/${weatherData.weather[0].icon }@2x`" />
 		</div>
 	</template>
 	
