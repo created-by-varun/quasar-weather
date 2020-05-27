@@ -5,6 +5,7 @@
   <div class="col q-pt-lg q-px-md">
   	<q-input
   	v-model="search"
+  	@keyup.enter="getWeatherBySearch"
   	placeholder="Search Location"
   	dark
   	borderless
@@ -18,7 +19,8 @@
   	
   	
   	<template v-slot:append> 
-  		<q-btn round dense flat icon="search" />
+  		<q-btn round dense flat icon="search" 
+  		@click="getWeatherBySearch"/>
   	</template>
   	</q-input>
 	</div>
@@ -43,7 +45,7 @@
 		
 		
 		<div class="col text-center">
-			<img :src="`http://openweathermap.org/img/wn/${weatherData.weather[0].icon }@2x`" />
+			<img :src="`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`" />
 		</div>
 	</template>
 	
@@ -52,10 +54,11 @@
 			<div class="col text-h2 text-weight-thin">
 				Quasar <br> Weather
 			</div>
-			<q-btn class="col" flat> 
+			<q-btn
+			@click="getLocation"
+			class="col" flat> 
 				<q-icon 
-				left 
-				@click="getLocation"
+				left
 				size="3em" 
 				name="my_location" />
 				<div>Find my location</div>
@@ -82,6 +85,11 @@ export default {
   	}
   },
   methods: {
+  	getWeatherBySearch(){
+  		this.$axios(`${this.apiUrl}?q=${this.search}&appid=${this.apiKey}&units=metric`).then(response => {
+  			this.weatherData = response.data
+  		})
+  	},
   	getLocation() {
   		navigator.geolocation.getCurrentPosition(position => {
   			this.lat = position.coords.latitude
